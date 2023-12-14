@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:bisque;
+            
+        }
+
+        h1 {
+            text-align: center; /* Centraliza o texto no h1 */
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        .estilo {
+            background-color: burlywood;
+            display: flex;
+            flex-direction: column; /* Organiza elementos verticalmente */
+            align-items: center; /*Centraliza verticalmente */
+            padding: 20px; /* Adiciona preenchimento para espaçamento */
+            border-radius: 15px; /*Arredonda as bordas da div */
+        }
+
+
+
+        img{
+            width: 500px; /*Reduz o tamanho da imagem */
+            border-radius: 15px; /*Arredonda as bordas da imagem*/
+        }
+
+        #resultado,
+        #recomendacao {
+            margin-top: 15px; /*Espaçamento superior entre resultados */
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="estilo">
+        <h1>Cálculo Peso Ideal</h1>
+        <img src="emoji.jpg" alt="emoji">
+    </div>
+
+    <label for="peso">Escreva Seu Peso Em Quilograma</label>
+    <input type="text" id="peso">
+
+    <label for="altura">Escreva Sua Altura em Metros</label>
+    <input type="text" id="altura">
+
+    <button onclick="calcularIMC()">Calcular IMC</button>
+
+    <div id="resultado"></div> <!--Aqui vai ser onde aparece o resultado-->
+    <div id="recomendacao"></div>
+
+    <script>
+        function calcularIMC() {
+            //Obtém os elementos do Body para interagir com eles
+            let pesoInput = document.getElementById("peso");
+            let alturaInput = document.getElementById("altura");
+            let resultadoDiv = document.getElementById("resultado");
+            let recomendacaoDiv = document.getElementById("recomendacao");
+
+            // Converte os valores de peso e altura para numeros
+            let peso = parseFloat(pesoInput.value);
+            let altura = parseFloat(alturaInput.value);
+
+            //Calcula o Indice de Massa Corporal (IMC)
+            let Calculadora = peso / (altura * altura);
+
+            // Exibe o resultado do IMC com duas casas decimais
+            resultadoDiv.textContent = "Seu IMC é: " + Calculadora.toFixed(2);
+
+            // Fornece recomendaçao com base no valor do IMC calculado
+            if (Calculadora <= 18.5) {
+                recomendacaoDiv.textContent = "Abaixo do peso";
+            } else if (Calculadora > 18.5 && Calculadora <= 24.9) {
+                recomendacaoDiv.textContent = "Peso normal";
+            } else if (Calculadora > 24.9 && Calculadora <= 29.9) {
+                recomendacaoDiv.textContent = "Sobrepeso";
+            } else if (Calculadora > 29.9 && Calculadora <= 34.9) {
+                recomendacaoDiv.textContent = "Obesidade grau I";
+            } else if (Calculadora > 34.9) {
+                recomendacaoDiv.textContent = "Você está com obesidade de grau II ou superior. É fundamental buscar ajuda médica para avaliar sua saúde e receber orientações específicas.";
+            }
+        }
+    </script>
+</body>
+</html>
